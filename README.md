@@ -16,16 +16,24 @@ NixOS config management. Safe by default. Scriptable by design.
 
 ## Quick Start
 
-```bash
-nix profile install github:emanuhells/nixman
-nixman doctor
-nixman packages add nginx
+Add to your flake:
+
+```nix
+{
+  inputs.nixman.url = "github:emanuhells/nixman";
+}
+
+# configuration.nix
+{ inputs, ... }: {
+  imports = [ inputs.nixman.nixosModules.default ];
+  programs.nixman.enable = true;
+}
 ```
 
-Not on NixOS? Try without installing:
+Or run directly:
 
 ```bash
-nix run github:emanuhells/nixman -- doctor
+nix run github:emanuhells/nixman -- status
 ```
 
 ## Features
@@ -74,21 +82,6 @@ nixman/
 ```
 
 **`nixman-core`** holds all domain logic — AST editing via `rnix-parser`, option index, intent engine, builders. **`nixman-cli`** wraps it in 20 clap commands. **`nixman-mcp`** exposes the same tools via MCP stdio/HTTP transport for AI agents.
-
-## NixOS Module
-
-```nix
-# flake.nix
-{
-  inputs.nixman.url = "github:emanuhells/nixman";
-}
-
-# configuration.nix
-{ inputs, ... }: {
-  imports = [ inputs.nixman.nixosModules.default ];
-  programs.nixman.enable = true;
-}
-```
 
 ## Contributing
 
