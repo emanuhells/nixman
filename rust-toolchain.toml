@@ -1,0 +1,6 @@
+[toolchain]
+channel  = "stable"
+# Minimum required: 1.83 (stabilised async closures, RPITIT improvements).
+# Use `rustup update` to upgrade to a newer stable release.
+profile  = "default"
+targets  = []
